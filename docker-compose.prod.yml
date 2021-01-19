@@ -2,6 +2,7 @@ version: "3.7"
 services:
 
   backend:
+    restart: always
     build:
       context: .
       dockerfile: app/Dockerfile.prod
@@ -21,6 +22,7 @@ services:
       - network-frontend
 
   nginx:
+    restart: always
     build:
       context: .
       dockerfile: nginx/Dockerfile
@@ -30,13 +32,14 @@ services:
     volumes:
       - static_volume:/static
     ports:
-      - 80:80
+      - 8000:80
     depends_on:
       - backend
     networks:
       - network-frontend
 
   postgres:
+    restart: always
     image: postgres:13.1-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
