@@ -14,7 +14,6 @@ import labels from './projects/labels'
 import members from './projects/members'
 import overview from './projects/overview'
 import statistics from './projects/statistics'
-import settings from './projects/settings'
 
 export default {
   home,
@@ -32,6 +31,5 @@ export default {
   labels,
   members,
   overview,
-  statistics,
-  settings
+  statistics
 }

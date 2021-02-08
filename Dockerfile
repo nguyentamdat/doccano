@@ -17,7 +17,7 @@ FROM python:${PYTHON_VERSION}-slim-buster AS backend-builder
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
     netcat=1.10-41.1 \
-    libpq-dev=11.9-0+deb10u1 \
+    libpq-dev=11.10-0+deb10u1 \
     unixodbc-dev=2.3.6-0.1 \
     g++=4:8.3.0-1 \
     libssl-dev=1.1.1d-0+deb10u4 \
@@ -29,6 +29,8 @@ COPY Pipfile* /tmp/
 # hadolint ignore=DL3013
 RUN pip install --no-cache-dir -U pip pipenv==2020.11.15 \
  && pipenv lock -r > /requirements.txt \
+ && echo "psycopg2-binary==2.8.6" >> /requirements.txt \
+ && echo "django-heroku==0.3.1" >> /requirements.txt \
  && pip install --no-cache-dir -r /requirements.txt \
  && pip wheel --no-cache-dir -r /requirements.txt -w /deps
 
